@@ -1,0 +1,52 @@
+div.figure {
+    // horizontal centering.  Don't do "margin: 0 auto" because it will override
+    // vertical margins set by "next sibling" selectors
+    margin-left: auto;
+    margin-right: auto;
+
+    img {
+        margin: 0 auto; // horizontally centered
+        width: 100%;
+        display: block; // don't add room for text descenders
+    }
+    div.caption {
+        text-align: center;
+        margin: 0 auto;
+        width: 100%;
+        font-size: 12pt;
+    }
+    div.credit {
+        text-align: center;
+        margin: 0 auto;
+        width: 100%;
+        font-size: 8pt;
+
+        // for small figures on small displays, let this overflow
+        // the div so that it doesn't occupy a ton of vertical space.
+        // (e.g. see white flag figure at end of Lockout part 4)
+        white-space: nowrap;
+    }
+}
+
+
+div.figure.xx-small { width: 20%; }
+div.figure.x-small { width: 30%; }
+div.figure.small { width: 40%; }
+div.figure.medium { width: 60%; }
+
+// figures with a transparent background
+div.figure.light, // requires light bg
+div.figure.dark,  // requires dark bg
+{
+    // give em a rectangle
+    border-radius: 25px;
+    padding: 30px;
+}
+
+div.figure.light {
+    background: #eed9b0;
+}
+
+div.figure.dark {
+    // use main background
+}

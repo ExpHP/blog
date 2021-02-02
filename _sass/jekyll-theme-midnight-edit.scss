@@ -1,0 +1,224 @@
+@import "jekyll-theme-midnight.scss";
+@import "rouge-base16-dark-edit.scss";
+@import "figures.scss";
+
+// colors copied from jekyll-theme-midnight
+$link-color: #ffcc00;
+$link-color-hover: #ffeb9b;
+$text-color: #f0e7d5;
+$h-color: #e8e8e8;
+$h3-color: #b6b6b6;
+$code-color: #efefef;
+
+// some custom colors of our own
+$bold-color: #c7c7ec;
+$h4-color: #c7c7ec;
+
+h4 {
+    color: $h4-color;
+}
+
+// Give inline `code` a background because otherwise it looks like
+//   there's funny spacing around it.
+// The class makes sure this only applies to `code` and not ```code```
+// (in the latter, the highlighter-rouge class is on an outer div)
+code.highlighter-rouge {
+  background: #101020;
+
+  // decrease from the obscenely large "6px" that the style comes with
+  // (padding is extra space INSIDE the colored box)
+  padding-left: 3px;
+  padding-right: 3px;
+  // likewise, formerly 4px
+  // (margin is extra space AROUND the colored box)
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+// make sure the link formatting applies to code in links
+a code {
+  // copied from the `a` formatting in jekyll-theme-midnight
+  color:#ffcc00;
+  text-decoration:none;
+
+  &:hover {
+    color: #ffeb9b;
+  }
+}
+
+// NOTE: The theme stylesheet has this:
+//
+//     b, strong {
+//         font-family: 'OpenSansBold';
+//         font-weight: normal;
+//     }
+//
+// I don't understand why the theme author did this. While it does make
+// normal text in <strong> bold, it fails to affect text inside <code>,
+// which looks weird.
+strong {
+    font-weight: bold;
+}
+
+// undo link colorization in section headings unless the user
+// tries to interact with them.
+//
+// Limited to post-content because I want the links to posts on the front page
+// to be colored still.
+//
+// The "direct descendent" combinator '>' is used so that other links added to
+// a heading (e.g. a footnote, or a heading explicitly written to contain a
+// link to another page) are still colored.
+.post-content h1 > a:not(:hover),
+.post-content h2 > a:not(:hover),
+.post-content h3 > a:not(:hover),
+.post-content h4 > a:not(:hover),
+.post-content h5 > a:not(:hover),
+.post-content h6 > a:not(:hover),
+{
+    color: inherit;
+
+    code {
+        color: $code-color;
+    }
+}
+
+// okay this is just getting silly
+.post-content h1 > a:hover,
+.post-content h2 > a:hover,
+.post-content h3 > a:hover,
+.post-content h4 > a:hover,
+.post-content h5 > a:hover,
+.post-content h6 > a:hover,
+{
+    // uniformly highlight code with the rest of a section
+    // header link on hover
+    code {
+        color: inherit;
+    }
+}
+
+// don't color the blog title which links to the front page
+a.title-link:not(:hover)
+{
+    color: inherit;
+}
+
+// Give bold a slight accent.
+strong {
+    color: $bold-color;
+}
+
+.footnote {
+    font-weight: bold;
+    font-size: 125%;
+    padding-left: 0.1em;
+}
+
+// otherwise it looks too similar to regular text
+h4 {
+    font-weight: bold;
+}
+
+// The theme puts bottom margins on a bunch of stuff.
+// They mostly just make nested <ul> look like horseshit,
+// but they do make headings look nice.
+//
+// Alas, if we want to do anything about the ugly cases, we can't just
+// fix those specifically with CSS because there is no "preceding sibling"
+// selector.  Instead, we must:
+//
+// * Remove all of the bottom margins defined by the style.
+// * Use "next sibling" selectors to whitelist desirable cases,
+//   bringing them back as top margins.
+ul,ol,table,dl {
+    margin: 0;
+}
+
+p,pre {
+    margin: 20px 0 0 0;
+}
+
+h3 + p,
+h3 + pre,
+{
+    margin-top: 10px; // smaller gap
+}
+
+p + *,
+ul + :not(li),
+div.highlighter-rouge + *,
+div.figure + *,
+{
+    margin-top: 20px;
+}
+
+// hide the GitHub header. The theme CSS does something funny to
+// it to make it hover, and it gets annoying when you follow anchored
+// links because it covers the anchored text.
+//
+// FIXME I'd rather just make it stop hovering, but I'm not sure how yet.
+//       (hiding it like this unfortunately leaves this unsightly blank
+//        void of content when you scroll all the way up)
+#header {
+    display: none;
+}
+
+// Custom permalinks. These should be empty spans at the beginning of a paragraph.
+// It is a span rather than a div so that kramdown puts them inside the <p>.
+//
+// Thankfully this seems to fit neatly in the pre-existing gutter on
+// smaller displays.
+span.anchor {
+    display: inline-block;
+
+    margin-left: -20px;
+    margin-right: 4px;
+
+    position: relative;
+    top: 2px;
+}
+
+// Go for a layout that looks like
+//
+// // (flush against the margin, no bullets)
+// Introduction
+//    > Part 1 - blah
+//                          // <-- gap between sections
+// A borrow checker without lifetimes
+//    > Part 2 - blah
+//    > Part 3 - blah       // <-- no gap within a section
+//    > Part 4 - blah
+div.series-toc {
+    margin-bottom: 20px;
+
+    > ul {
+        padding-left: 0px;
+    }
+    > ul > li {
+        list-style-type: none;
+        list-style-image: none;
+    }
+
+    > ul > li + li {
+        margin-top: 20px;
+    }
+}
+
+// blockquote styling is nice for sidebars and other things
+// that aren't blockquotes, so I don't appreciate the auto-italics
+// in the theme.
+//
+// It'd be *really* nice if I could use custom div classes for this
+// to truly separate style from content; but you can't render markdown
+// in a div unless you do some liquid hack like
+//
+//     {% capture stuff %}
+//       markdown here
+//     {% endcapture %}
+//     <div class="lol>{{ stuff | markdownify }}</div>
+//
+// And even that can't be done if you want a footnote inside the block.
+blockquote {
+    font-style: inherit;
+}

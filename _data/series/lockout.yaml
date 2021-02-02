@@ -1,0 +1,27 @@
+# Used to generate the ToC in each section
+
+- heading: 'Introduction'
+  items:
+  - series-part-id: 1
+    title: 'Everything you know about lifetimes is wrong.' # that period belongs. No touchie.
+
+- heading: 'A borrow checker without lifetimes'
+  items:
+  - series-part-id: 2
+    title: 'And nary a function to be found'
+    phrase: 'we learn to think like a borrow checker'
+  - series-part-id: 3
+    title: 'Really reborrowing'
+    phrase: 'declaring a constitution and sticking to it'
+  - series-part-id: 4
+    title: 'Invariance without variance'
+    phrase: 'playing whac-a-mole'
+
+- heading: 'Lifetimes on values'
+  items:
+  - series-part-id: 5
+    title: 'Valuable lifetimes'
+    phrase: discovering Rust's missing syntax
+
+  - series-part-id: 6
+    title: TBA
