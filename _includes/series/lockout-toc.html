@@ -28,7 +28,7 @@
             and site_post.series-part-id != page.series-part-id
           -%}
             {%- capture item_title -%}
-              <a href="{{ site_post.url }}">{{item.title}}</a>
+              <a href="{{ site_post.url | relative_url }}">{{item.title}}</a>
             {%- endcapture -%}
             {%- break -%}
           {%- endif -%}

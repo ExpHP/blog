@@ -149,7 +149,7 @@ fn bad_extension() {
 
 _\*Rides off on a unicorn into the sunset\*_
 
-<div class="figure medium"><img alt="Sunset dot jay-peg" src="/assets/img/post/lockout/sunset.jpg"/></div>
+<div class="figure medium"><img alt="Sunset dot jay-peg" src="{{ '/assets/img/post/lockout/sunset.jpg' | relative_url }}"/></div>
 
 ...
 
@@ -266,7 +266,7 @@ Hmm, let's see, let's see, what was my reasoning... lemme just...
 Right.  In other words, it was _lost to the sands of time._
 
 <div class="figure medium">
-    <img alt="A block of swiss cheese" src="/assets/img/post/lockout/swiss-cheese.jpg" />
+    <img alt="A block of swiss cheese" src="{{ '/assets/img/post/lockout/swiss-cheese.jpg' | relative_url }}" />
     <div class="caption">My borrow checker. (artist's impression)</div>
     <div class="credit">Ekg917, CCSA 4.0 via wikimedia commons</div>
 </div>
@@ -354,7 +354,7 @@ I mentioned in the previous episode that rust considers both deref projections a
 Hah... it might work, but I don't want to touch that can of worms with a ten foot pole.
 
 <div class="figure x-small">
-    <img alt="A white flag" src="/assets/img/post/lockout/white-flag.png" />
+    <img alt="A white flag" src="{{ '/assets/img/post/lockout/white-flag.png' | relative_url }}" />
     <div class="credit">KissPNG<br/> labeled for noncommercial reuse</div>
 </div>
 

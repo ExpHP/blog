@@ -1,3 +1,6 @@
+---
+---
+
 // postprocess.js
 //
 // For NON-ESSENTIAL (styling) features of ExpHP.github.io that cannot be accomplished through
@@ -51,7 +54,7 @@
             let anchor = div.appendChild(document.createElement("a"));
             let img = anchor.appendChild(document.createElement("img"));
             anchor.href = "#" + div.id;
-            img.src = "/assets/img/meta/permalink.png";
+            img.src = "{{ '/assets/img/meta/permalink.png' | relative_url }}";
         }
     })
 })()

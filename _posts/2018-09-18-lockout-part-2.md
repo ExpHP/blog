@@ -118,7 +118,7 @@ For its brevity, the above code makes a fair number of locks:
 
 We can visualize this; below, the vertical axis is control flow through the function, the blue box represents the read-lock held by `borrow`, and the blue and red lines represent briefly-acquired read- and write-locks.
 
-<div class="figure light small"><img src="/assets/img/post/lockout/borrows-1.svg" /></div>
+<div class="figure light small"><img src="{{ '/assets/img/post/lockout/borrows-1.svg' | relative_url }}"/></div>
 
 **Our borrow checker rejects this code because the write-lock of `boxy` created on line 2 conflicts with the existing read-lock held by `borrow`.**  Good.
 
@@ -139,7 +139,7 @@ Hmm. This should be allowed... but is it?  Let's see:
 * Line 3 briefly locks `b` for reading.
 * At the closing brace, `b`, `a`, and `boxy` are deinitialized, in that order.
 
-<div class="figure light small"><img src="/assets/img/post/lockout/i-suck-at-inkscape.svg" alt="I suck far too much at inkscape to make another one of those images."/></div>
+<div class="figure light small"><img src="{{ '/assets/img/post/lockout/i-suck-at-inkscape.svg' | relative_url }}" alt="I suck far too much at inkscape to make another one of those images."/></div>
 
 No conflicts here!  It appears that, currently, reborrowing Just Works.™  Let's try to keep it that way!
 
