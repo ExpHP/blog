@@ -19,7 +19,7 @@
         and site_post.series-part-id == item.series-part-id
       -%}
 {{- newline -}}
-[Part {{ item.series-part-id }}]: {{ site_post.url }}
+[Part {{ item.series-part-id }}]: {{ site_post.url | relative_url }}
       {%- break -%}
       {%- endif -%}
     {%- endfor -%}
